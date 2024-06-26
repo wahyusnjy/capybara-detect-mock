@@ -12,11 +12,14 @@ public class DetectMockyPlugin extends Plugin {
     private DetectMocky implementation = new DetectMocky();
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void setMockLocation(PluginCall call) {
+      double latitude = call.getDouble("latitude");
+      double longitude = call.getDouble("longitude");
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+      implementation.setMockLocation(latitude, longitude); // Assume this method sets the mock location
+
+      JSObject ret = new JSObject();
+      ret.put("success", true);
+      call.resolve(ret);
     }
 }
